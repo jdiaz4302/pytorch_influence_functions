@@ -85,7 +85,7 @@ def grad_z(z, t, model, gpu=-1):
     Returns:
         grad_z: list of torch tensor, containing the gradients
             from model parameters to loss"""
-    model.eval()
+    # model.eval(), eval setting raises "RuntimeError: cudnn RNN backward can only be called in training mode"
     # initialize
     if gpu >= 0:
         z, t = z.cuda(), t.cuda()
