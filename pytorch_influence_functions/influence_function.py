@@ -127,6 +127,7 @@ def hvp(y, w, v):
         elemwise_products += torch.sum(grad_elem * v_elem)
 
     # Second backprop
-    return_grads = grad(elemwise_products, w, create_graph=True)
+    with torch.backends.cudnn.flags(enabled=False):
+        return_grads = grad(elemwise_products, w, create_graph=True)
 
     return return_grads
